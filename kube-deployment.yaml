@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sit737-9-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sit737-9
+  template:
+    metadata:
+      labels:
+        app: sit737-9
+    spec:
+      containers:
+      - name: sit737-9
+        image: siddhant792/sit737:latest
+        env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-credentials
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-credentials
+              key: password
